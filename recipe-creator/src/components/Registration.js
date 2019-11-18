@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default function Registration() {
+function Registration() {
     return (
       <h1>Testing 2</h1>
     );
 }
+
+export default Registration;

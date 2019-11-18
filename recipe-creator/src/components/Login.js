@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import axios from 'axios';
 
 function Login({ values, errors, touched, status }) {
-    const [login, setLogin] = useState([]);
+    // const [login, setLogin] = useState([]);
 
-    useEffect(() => {
-        status && setLogin(login => [...login, status])
-    }, [status]);
+    // useEffect(() => {
+    //     status && setLogin(login => [...login, status])
+    // }, [status]);
 
     return (
         <div className='login-form'>
@@ -19,14 +20,11 @@ function Login({ values, errors, touched, status }) {
                 {touched.password && errors.password && <p>{errors.password}</p>}
                 <Field type='checkbox' name='terms' checked={values.terms}/>
                 {touched.terms && errors.terms && <p>{errors.terms}</p>}
-                <button type='submit'>Submit!</button>
-            </Form>
-            {/* {login.map(user => (
-                <div key={user.id}>
-                    <p>email: {user.email}</p>
-                    <p>password: {user.password}</p>
+                <button type='submit'>Login</button>
+                <div>
+                    Not a member? <Link to='./register'>Register here!</Link>
                 </div>
-            ))} */}
+            </Form>
         </div>
     )
 }
