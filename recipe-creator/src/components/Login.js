@@ -18,8 +18,6 @@ function Login({ values, errors, touched, status }) {
                 {touched.email && errors.email && <p>{errors.email}</p>}
                 <Field type='password' name='password' placeholder='Password' />
                 {touched.password && errors.password && <p>{errors.password}</p>}
-                <Field type='checkbox' name='terms' checked={values.terms}/>
-                {touched.terms && errors.terms && <p>{errors.terms}</p>}
                 <button type='submit'>Login</button>
                 <div>
                     Not a member? <Link to='./register'>Register here!</Link>
@@ -30,11 +28,10 @@ function Login({ values, errors, touched, status }) {
 }
 
 const FormikLogin = withFormik({
-    mapPropsToValues({ email, password, terms }) {
+    mapPropsToValues({ email, password }) {
         return {
             email: email || '',
-            password: password || '',
-            terms: terms || false
+            password: password || ''
         };
     },
 
@@ -45,12 +42,10 @@ const FormikLogin = withFormik({
         password: Yup.string()
             .min(6, 'Whoa buddy, that is not very secure. Make your password at least 6 characters long.')
             .max(16, 'We understand you love security, but that password is way too long.')
-            .required('A password is required. Please refrain from using your birthday.'),
-        terms: Yup.bool()
-            .oneOf([true], 'Must Accept Terms of Service, even if you do not read them.')
+            .required('A password is required. Please refrain from using your birthday.')
     }),
 
-    handleSubmit(values, { setStatus, resetForm}) {
+    handleSubmit(values, { setStatus, resetForm }) {
         axios
             .post('', values)
             .then(response => {
