@@ -7,6 +7,8 @@ function Registration({ values, errors, touched, status }) {
   return (
     <div className='registration-form'>
       <Form>
+        <Field type='text' name='username' placeholder='username' />
+        {touched.username && errors.username && <p>{errors.username}</p>}
         <Field type='text' name='email' placeholder='Email' />
         {touched.email && errors.email && <p>{errors.email}</p>}
         <Field type='password' name='password' placeholder='Password' />
@@ -20,8 +22,9 @@ function Registration({ values, errors, touched, status }) {
 }
 
 const FormikRegistration = withFormik({
-  mapPropsToValues({ email, password, terms }) {
+  mapPropsToValues({ username, email, password, terms }) {
     return {
+      username: username || '',
       email: email || '',
       password: password || '',
       terms: terms || false
@@ -29,6 +32,8 @@ const FormikRegistration = withFormik({
   },
 
   validationSchema: Yup.object().shape({
+    username: Yup.string()
+      .required('Your username is required to login.'),
     email: Yup.string()
       .email('Not a valid email address. Check your spelling, poindexter.')
       .required('Your email address is required. Expect tons of spam.'),

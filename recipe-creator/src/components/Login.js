@@ -14,8 +14,8 @@ function Login({ values, errors, touched, status }) {
     return (
         <div className='login-form'>
             <Form>
-                <Field type='text' name='email' placeholder='Email' />
-                {touched.email && errors.email && <p>{errors.email}</p>}
+                <Field type='text' name='username' placeholder='username' />
+                {touched.username && errors.username && <p>{errors.username}</p>}
                 <Field type='password' name='password' placeholder='Password' />
                 {touched.password && errors.password && <p>{errors.password}</p>}
                 <button type='submit'>Login</button>
@@ -28,17 +28,16 @@ function Login({ values, errors, touched, status }) {
 }
 
 const FormikLogin = withFormik({
-    mapPropsToValues({ email, password }) {
+    mapPropsToValues({ username, password }) {
         return {
-            email: email || '',
+            username: username || '',
             password: password || ''
         };
     },
 
     validationSchema: Yup.object().shape({
-        email: Yup.string()
-            .email('Not a valid email address. Check your spelling, poindexter.')
-            .required('Your email address is required. Expect tons of spam.'),
+        username: Yup.string()
+            .required('Your username is required to login.'),
         password: Yup.string()
             .min(6, 'Whoa buddy, that is not very secure. Make your password at least 6 characters long.')
             .max(16, 'We understand you love security, but that password is way too long.')
