@@ -47,10 +47,11 @@ const FormikRegistration = withFormik({
 
   handleSubmit(values, { setStatus, resetForm }) {
     axios
+      // .post('https://secretfamilyrecipescookbook.herokuapp.com/register', values)
       .post('', values)
       .then(response => {
-        console.log(response.data);
-        setStatus(response.data);
+        console.log(response);
+        setStatus(response);
         resetForm();
       })
       .catch(error => {
